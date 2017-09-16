@@ -1,0 +1,65 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="changelog-structure.xml">
+
+    <changeSet id="3" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                <![CDATA[
+                    SELECT COUNT(*) FROM users WHERE username = 'admin';
+                ]]>
+            </sqlCheck>
+            <sqlCheck expectedResult="0">
+                <![CDATA[
+                    SELECT COUNT(*) FROM user_roles WHERE username = 'admin' and role = 'ROLE_ADMIN';
+                ]]>
+            </sqlCheck>
+            <sqlCheck expectedResult="0">
+                <![CDATA[
+                    SELECT COUNT(*) FROM user_roles WHERE username = 'admin' and role = 'ROLE_USER';
+                ]]>
+            </sqlCheck>
+            <sqlCheck expectedResult="0">
+                <![CDATA[
+                    SELECT COUNT(*) FROM users WHERE username = 'user';
+                ]]>
+            </sqlCheck>
+            <sqlCheck expectedResult="0">
+                <![CDATA[
+                    SELECT COUNT(*) FROM user_roles WHERE username = 'user' and role = 'ROLE_USER';
+                ]]>
+            </sqlCheck>
+        </preConditions>
+        <comment>Insert admin user</comment>
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="password" value="admin"/>
+            <column name="email" value="admin@admin.com"/>
+            <column name="name" value="John Doe"/>
+            <column name="enabled" value="1"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="username" value="admin"/>
+            <column name="role" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="username" value="admin"/>
+            <column name="role" value="ROLE_USER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="user"/>
+            <column name="password" value="user"/>
+            <column name="email" value="user@user.com"/>
+            <column name="name" value="Jane Doe"/>
+            <column name="enabled" value="1"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="username" value="user"/>
+            <column name="role" value="ROLE_USER"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

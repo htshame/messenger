@@ -1,0 +1,163 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="changelog-structure.xml">
+
+    <changeSet id="1" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+        <comment>Users Table</comment>
+        <createTable tableName="users">
+            <column name="username" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="enabled" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_roles"/>
+            </not>
+        </preConditions>
+        <comment>Roles Table</comment>
+        <createTable tableName="user_roles">
+            <column autoIncrement="true" name="user_role_id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_user_role"/>
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="messages"/>
+            </not>
+        </preConditions>
+        <comment>Messages table</comment>
+        <createTable tableName="messages">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_messages"/>
+            </column>
+            <column name="sender" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="addressee" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="theme" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="text" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+   <!--  <changeSet id="5" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists tableName="users" indexName="uc_users_email" />
+            </not>
+            <tableExists tableName="users"/>
+        </preConditions>
+        <addUniqueConstraint
+                columnNames="email"
+                constraintName="uc_users_email"
+                schemaName="public"
+                tableName="users"/>
+    </changeSet>-->
+
+    <changeSet id="6" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_user_roles_users_username"/>
+            </not>
+            <tableExists tableName="users"/>
+            <tableExists tableName="user_roles"/>
+        </preConditions>
+        <addForeignKeyConstraint
+              constraintName="fk_user_roles_users_username"
+              referencedTableName="users"
+              baseColumnNames="username"
+              baseTableName="user_roles"
+              referencedColumnNames="username"/>
+    </changeSet>
+
+    <changeSet id="7" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="contacts"/>
+            </not>
+        </preConditions>
+        <comment>Contacts table</comment>
+        <createTable tableName="contacts">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_contacts"/>
+            </column>
+            <column name="master" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="slave" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- <changeSet id="8" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists tableName="contacts" indexName="uc_contacts" />
+            </not>
+            <tableExists tableName="contacts"/>
+        </preConditions>
+        <addUniqueConstraint
+                columnNames="master, slave"
+                constraintName="uc_contacts"
+                schemaName="public"
+                tableName="contacts"/>
+    </changeSet> -->
+
+    <!--
+    //TODO crutch.! Should be here, but there's no requirements on how to handle messages when deleting user.
+    <changeSet id="9" author="zagnitko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists tableName="user_roles" indexName="uc_user_roles" />
+            </not>
+            <tableExists tableName="user_roles"/>
+        </preConditions>
+        <addUniqueConstraint
+                columnNames="username, role"
+                constraintName="uc_user_roles"
+                schemaName="public"
+                tableName="user_roles"/>
+    </changeSet> -->
+
+</databaseChangeLog>

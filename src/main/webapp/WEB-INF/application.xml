@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/data/jpa
+                           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="/WEB-INF/jdbc.properties"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${hibernate.connection.driver_class}"/>
+        <property name="url" value="${hibernate.connection.url}"/>
+        <property name="username" value="${hibernate.connection.username}"/>
+        <property name="password" value="${hibernate.connection.password}"/>
+    </bean>
+
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:liquibase/changelog.xml"/>
+        <property name="contexts" value="test, production"/>
+        <property name="shouldRun" value="true"/>
+    </bean>
+
+    <context:annotation-config/>
+
+    <bean id="messengerManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+            p:dataSource-ref="dataSource">
+        <property name="persistenceUnitName" value="mmf"/>
+        <property name="packagesToScan" value="zagnitko.messenger.entity"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sharedCacheMode" value="${zagnitko.messenger.jdbc.caching:UNSPECIFIED}"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true"/>
+            </bean>
+        </property>
+        <property name="jpaProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect
+            </value>
+        </property>
+    </bean>
+
+    <jpa:repositories base-package="zagnitko.messenger.repository"
+                      entity-manager-factory-ref="messengerManagerFactory"
+                      transaction-manager-ref="transactionManager"/>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="messengerManagerFactory"/>
+    </bean>
+</beans>

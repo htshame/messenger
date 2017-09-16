@@ -1,0 +1,100 @@
+body {
+    background-color: rgb(248, 248, 248);
+}
+
+body button {
+    border-radius: 5px;
+    color: palegoldenrod;
+    font-size: 23px;
+    height: 50px;
+    width: 150px;
+}
+
+.header-class {
+    color: #798ccb;
+    text-align: center;
+}
+
+.hello-login-button {
+    background-color: #ff0000;
+    position: absolute;
+    right: calc(50% - 100px);
+    transition: all 3s ease 0.3s;
+}
+
+.hello-login-button:hover {
+    right: 0;
+}
+
+.hello-sign-up-button {
+    background-color: #4ee32d;
+    left: calc(53% - 100px);
+    margin-top: 60px;
+    position: absolute;
+    transition: all 3s ease 0.3s;
+}
+
+.hello-sign-up-button:hover {
+    left: 0;
+}
+
+.hello-login-sing-up-table {
+    margin: 200px auto auto;
+}
+
+.hello-logged-in-user-principal {
+    position: absolute;
+    right: 2%;
+}
+
+.hello-authed-user-header {
+    text-align: center;
+}
+
+.hello-authed-open-contacts {
+    background-color: #4ee32d;
+    position: absolute;
+}
+
+.hello-authed-change-password {
+    color: teal;
+    height: 65px;
+    margin-top: 60px;
+}
+
+.hello-authed-change-pw-button {
+    background-color: silver;
+    color: black;
+    font-size: large;
+    margin-top: 10px;
+}
+
+.delete-contact-class {
+    background-color: black;
+    color: white;
+}
+
+.add-contact-class {
+    background-color: lightblue;
+    color: slateblue;
+}
+
+.send-message-class {
+    background-color: slategrey;
+    color: white;
+    font-size: 30px;
+}
+
+.go-to-admin-page-button {
+    margin-top: 10px;
+}
+
+.admin-page-button-actual {
+    background-color: teal;
+    color: tomato;
+}
+
+.message-grid-div {
+    margin: -7% auto auto;
+    width: 65%;
+}
