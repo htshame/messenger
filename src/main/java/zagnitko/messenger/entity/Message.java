@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Message entity.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Entity
 @Table(name = "MESSAGES")
@@ -35,7 +35,7 @@ public class Message {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "sender")

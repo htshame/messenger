@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * User's role entity.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Entity
 @Table(name = "USER_ROLES")
@@ -30,7 +30,7 @@ public class UserRole {
 
     @Id
     @Column(name = "user_role_id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userRoleId;
 
     @Column(name = "username")

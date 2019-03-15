@@ -1,27 +1,27 @@
 package zagnitko.messenger.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Main controller. It it used as router.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Controller
 public class MainController {
 
     /**
      * Return the main page.
-     * @return - hello.jsp
+     * @return - hello.jsp.
      */
-    @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
+    @GetMapping(value = { "/", "/welcome**" }, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView();
         model.addObject("head", "Welcome to the Messenger!");
@@ -32,9 +32,9 @@ public class MainController {
 
     /**
      * Return admin page.
-     * @return - admin.jsp
+     * @return - admin.jsp.
      */
-    @RequestMapping(value = "/admin**", method = RequestMethod.GET)
+    @GetMapping(value = "/admin**", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ModelAndView adminPage() {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "This is the admin page");
@@ -47,9 +47,9 @@ public class MainController {
      * Return login page.
      * @param error - authorization error.
      * @param logout - log out.
-     * @return - login.jsp
+     * @return - login.jsp.
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout) {
         ModelAndView model = new ModelAndView();
@@ -65,10 +65,10 @@ public class MainController {
 
     /**
      * 403 error page.
-     * @return - 403.jsp
+     * @return - 403.jsp.
      */
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public ModelAndView accesssDenied() {
+    @GetMapping(value = "/403", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ModelAndView accessDenied() {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
@@ -82,9 +82,9 @@ public class MainController {
     /**
      * Registration page.
      * @param error - registration error.
-     * @return - register.jsp
+     * @return - register.jsp.
      */
-    @RequestMapping(value = "/reg", method = RequestMethod.GET)
+    @GetMapping(value = "/reg", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ModelAndView register(@RequestParam(value = "error", required = false) String error) {
         ModelAndView model = new ModelAndView();
         model.setViewName("register");

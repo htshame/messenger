@@ -6,7 +6,7 @@ import zagnitko.messenger.dto.ContactDTO;
 
 /**
  * Contacts service.
- * @author zagnitko
+ * @author zagnitko.
  */
 public interface ContactsService {
 

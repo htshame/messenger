@@ -13,7 +13,7 @@ import zagnitko.messenger.service.RegistrationService;
 
 /**
  * Registration service implementation.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Service
 @Primary

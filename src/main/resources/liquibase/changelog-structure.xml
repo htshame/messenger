@@ -145,7 +145,7 @@
     </changeSet> -->
 
     <!--
-    //TODO crutch.! Should be here, but there's no requirements on how to handle messages when deleting user.
+    //TODO Should be here, but there's no requirements on how to handle messages when deleting user.
     <changeSet id="9" author="zagnitko">
         <preConditions onFail="MARK_RAN">
             <not>

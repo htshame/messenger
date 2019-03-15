@@ -14,8 +14,8 @@ import zagnitko.messenger.repository.UsersRepository;
 import zagnitko.messenger.service.UserService;
 
 /**
- * Users service implelentation.
- * @author zagnitko
+ * Users service implementation.
+ * @author zagnitko.
  */
 @Service
 public class UsersServiceImpl implements UserService {
@@ -43,11 +43,12 @@ public class UsersServiceImpl implements UserService {
         List<User> userList = repository.findAll();
         List<UserDTO> retList = new ArrayList<>();
         for (User user : userList) {
-            String userRoles = "";
-            for (UserRole urole : userRolesRepository.getUserRoleByUsername(user.getUsername())) {
-                userRoles += urole.getRole() + "; ";
+            StringBuilder userRoles = new StringBuilder();
+            for (UserRole userRole : userRolesRepository.getUserRoleByUsername(user.getUsername())) {
+                userRoles.append(userRole.getRole()).append("; ");
             }
-            retList.add(new UserDTO(user.getUsername() + "; " + user.getName() + "; " + userRoles, user.getUsername()));
+            retList.add(new UserDTO(user.getUsername() + "; " + user.getName() + "; " + userRoles,
+                    user.getUsername()));
         }
         return retList;
     }

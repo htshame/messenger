@@ -2,8 +2,7 @@ package zagnitko.messenger.dto;
 
 /**
  * Contact DTO.
- * @author zagnitko
- *
+ * @author zagnitko.
  */
 public class ContactDTO {
 

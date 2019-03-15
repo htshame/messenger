@@ -1,15 +1,14 @@
 package zagnitko.messenger.controller;
 
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +21,6 @@ import zagnitko.messenger.service.UserService;
  */
 @RequestMapping("/users")
 @RestController
-@Component
 public class UsersController {
 
     /**
@@ -41,17 +39,17 @@ public class UsersController {
      * @param password - new password.
      * @return - entityManager.
      */
-    @RequestMapping(value = "/changeMyPassword", method = POST, produces = {"application/json"})
-    public ResponseEntity<?> changeMyPassword(@RequestParam(value = "password", required = true) String password) {
+    @PostMapping(value = "/changeMyPassword",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<String> changeMyPassword(@RequestParam(value = "password") String password) {
         try {
             service.changeUsersPassword(
                     SecurityContextHolder.getContext().getAuthentication().getName(), password);
-            return new ResponseEntity<Object>("success", HttpStatus.OK);
+            return new ResponseEntity<>("success", HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error changing password for user [" +
-                    SecurityContextHolder.getContext().getAuthentication().getName() + "].");
-            e.printStackTrace();
-            return new ResponseEntity<Object>("Houston, we have a problem", HttpStatus.INTERNAL_SERVER_ERROR);
+                    SecurityContextHolder.getContext().getAuthentication().getName() + "].", e);
+
+            return new ResponseEntity<>("Houston, we have a problem", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -59,14 +57,13 @@ public class UsersController {
      * Get all users for select2 component.
      * @return - List<UserDTO>.
      */
-    @RequestMapping(value = "/getAllUsersSelect2", method = GET, produces = {"application/json"})
-    public ResponseEntity<?> getAllUsers() {
+    @GetMapping(value = "/getAllUsersSelect2", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Object> getAllUsers() {
         try {
-            return new ResponseEntity<Object>(service.getAllUsersForSelect2(), HttpStatus.OK);
+            return new ResponseEntity<>(service.getAllUsersForSelect2(), HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("Error getting all users.");
-            e.printStackTrace();
-            return new ResponseEntity<Object>("Houston, we have a problem", HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.error("Error getting all users.", e);
+            return new ResponseEntity<>("Houston, we have a problem", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -74,14 +71,13 @@ public class UsersController {
      * Get all users and roles for select2 component.
      * @return - List<UserDTO>.
      */
-    @RequestMapping(value = "/getAllUsersSelect2WithRoles", method = GET, produces = {"application/json"})
-    public ResponseEntity<?> getAllUsersWithRoles() {
+    @GetMapping(value = "/getAllUsersSelect2WithRoles", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Object> getAllUsersWithRoles() {
         try {
-            return new ResponseEntity<Object>(service.getAllUsersForSelect2WithRoles(), HttpStatus.OK);
+            return new ResponseEntity<>(service.getAllUsersForSelect2WithRoles(), HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("Error getting all users.");
-            e.printStackTrace();
-            return new ResponseEntity<Object>("Houston, we have a problem", HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.error("Error getting all users.", e);
+            return new ResponseEntity<>("Houston, we have a problem", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -90,15 +86,14 @@ public class UsersController {
      * @param userToDelete - user to remove.
      * @return - responseEntity.
      */
-    @RequestMapping(value = "/deleteUser", method = POST, produces = {"application/json"})
-    public ResponseEntity<?> deleteUser(@RequestParam(value = "userToDelete", required = true) String userToDelete) {
+    @PostMapping(value = "/deleteUser", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<String> deleteUser(@RequestParam(value = "userToDelete") String userToDelete) {
         try {
             service.deleteUser(userToDelete);
-            return new ResponseEntity<Object>("success", HttpStatus.OK);
+            return new ResponseEntity<>("success", HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("Error deleting user [" + userToDelete + "].");
-            e.printStackTrace();
-            return new ResponseEntity<Object>("Houston, we have a problem", HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.error("Error deleting user [{}].", userToDelete, e);
+            return new ResponseEntity<>("Houston, we have a problem", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

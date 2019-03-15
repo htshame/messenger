@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 /**
  * Contact entity.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Entity
 @Table(name = "CONTACTS")
@@ -27,7 +27,7 @@ public class Contact {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "master")

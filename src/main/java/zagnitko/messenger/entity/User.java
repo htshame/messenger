@@ -1,13 +1,15 @@
 package zagnitko.messenger.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * User entity.
- * @author zagnitko
- *
+ * @author zagnitko.
  */
 @Entity
 @Table(name = "USERS")

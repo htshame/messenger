@@ -6,7 +6,7 @@ import zagnitko.messenger.dto.UserDTO;
 
 /**
  * User's service.
- * @author zagnitko
+ * @author zagnitko.
  */
 public interface UserService {
 

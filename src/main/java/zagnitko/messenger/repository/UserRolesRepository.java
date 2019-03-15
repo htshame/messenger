@@ -14,7 +14,7 @@ import zagnitko.messenger.entity.UserRole;
 
 /**
  * User's roles repository.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Repository
 public interface UserRolesRepository extends JpaRepository<UserRole, Long>, JpaSpecificationExecutor<UserRole> {

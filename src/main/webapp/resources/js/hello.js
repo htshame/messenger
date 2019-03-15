@@ -16,6 +16,7 @@ $(document).ready(function() {
             }
         });
     }
+
     var that = this;
     (function() {
         that.updateUsersList();
@@ -36,14 +37,17 @@ $(document).ready(function() {
     $('#choose-contact').dialog({autoOpen: false});
     $('#message-sent').dialog({autoOpen: false});
     $('#dialog-send-message').dialog({autoOpen: false});
+
     $('#open-contacts').click(function() {
         $('#dialog-contacts').dialog('open');
         $('div:has(#dialog-contacts)').width("500px");
     });
     $('#dialog-password').dialog({autoOpen: false});
+
     $('#change-password').click(function() {
         $('#dialog-password').dialog('open');
     });
+
     $('#user-change-password').click(function() {
         if (($('#conf-new-password').val()).localeCompare($('#new-password').val()) === 0) {
             $('#password-changed').dialog({autoOpen: false});
@@ -62,6 +66,7 @@ $(document).ready(function() {
             $('#password-wrong').dialog('open');
         }
     });
+
     $('#add-contact').click(function() {
         if ($('#all-contacts').val() !== "") {
             var obj = {};
@@ -77,6 +82,7 @@ $(document).ready(function() {
             $('#choose-contact').dialog('open');
         }
     });
+
     $('#delete-contact').click(function() {
         if ($('#my-contacts').val() !== "") {
             var obj = {};
@@ -92,11 +98,13 @@ $(document).ready(function() {
             $('#choose-contact').dialog('open');
         }
     });
+
     $('#send-message').click(function() {
         $('#dialog-send-message').dialog('open');
         $('div:has(#dialog-send-message)').width("500px");
         $('div:has(#dialog-send-message)').height("250px");
     });
+
     $('#send-message-actual').click(function() {
         if ($('#my-contacts-send').val() === "") {
             $('#choose-contact').dialog('open');
@@ -117,6 +125,7 @@ $(document).ready(function() {
             });
         }
     });
+
     $('#delete-this-message').click(function() {
         var obj = {};
         obj.id = that.messageId;

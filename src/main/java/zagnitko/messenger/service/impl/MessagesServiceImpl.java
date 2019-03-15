@@ -15,7 +15,7 @@ import zagnitko.messenger.service.MessagesService;
 
 /**
  * Messages service implementation.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Service
 @Primary

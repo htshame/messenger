@@ -42,7 +42,7 @@
     <properties>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.3.5.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <jstl.version>1.2</jstl.version>
         <org.liquibase.version>3.3.2</org.liquibase.version>
@@ -56,7 +56,7 @@
         <org.liquibase.version>3.3.3</org.liquibase.version>
         <org.postgresql.version>9.3-1100-jdbc41</org.postgresql.version>
         <org.slf4j.version>1.7.21</org.slf4j.version>
-        <com.fasterxml.jackson.core>2.5.0</com.fasterxml.jackson.core>
+        <com.fasterxml.jackson.core>2.8.11.1</com.fasterxml.jackson.core>
     </properties>
 
     <dependencies>
@@ -186,6 +186,5 @@
             <artifactId>jackson-databind</artifactId>
             <version>${com.fasterxml.jackson.core}</version>
         </dependency>
-		        
     </dependencies>
 </project>

@@ -13,7 +13,7 @@ import zagnitko.messenger.service.ContactsService;
 
 /**
  * Contacts service implementation.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Service
 public class ContactsServiceImpl implements ContactsService {

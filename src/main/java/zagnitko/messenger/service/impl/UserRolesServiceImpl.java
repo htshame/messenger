@@ -11,7 +11,7 @@ import zagnitko.messenger.service.UserRolesService;
 
 /**
  * UserRoles service implementation.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Service
 @Primary

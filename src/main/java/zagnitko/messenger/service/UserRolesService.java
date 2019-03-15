@@ -2,7 +2,7 @@ package zagnitko.messenger.service;
 
 /**
  * UserRoles service.
- * @author zagnitko
+ * @author zagnitko.
  */
 public interface UserRolesService {
 

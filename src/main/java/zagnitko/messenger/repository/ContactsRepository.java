@@ -14,7 +14,7 @@ import zagnitko.messenger.entity.Contact;
 
 /**
  * Contacts repository.
- * @author zagnitko
+ * @author zagnitko.
  */
 @Repository
 public interface ContactsRepository extends JpaRepository<Contact, Long>, JpaSpecificationExecutor<Contact> {

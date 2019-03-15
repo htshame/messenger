@@ -6,7 +6,7 @@ import zagnitko.messenger.entity.Message;
 
 /**
  * Messages service.
- * @author zagnitko
+ * @author zagnitko.
  */
 public interface MessagesService {
 

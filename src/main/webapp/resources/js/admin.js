@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    this.updateUsersList = function() {	
+    this.updateUsersList = function() {
         $.ajax({
             method: 'GET',
             url: '/messenger/users/getAllUsersSelect2WithRoles',
@@ -11,6 +11,7 @@ $(document).ready(function() {
             });
         });
     }
+
     var that = this;
     (function() {
         that.updateUsersList();
@@ -36,6 +37,7 @@ $(document).ready(function() {
             });
         }
     });
+
     $('#make-admin').click(function() {
         $('#choose-contact').dialog({autoOpen: false});
         if ($('#all-users').val() === "") {
@@ -53,6 +55,7 @@ $(document).ready(function() {
             });
         }
     });
+
     $('#revert-admin').click(function() {
         $('#choose-contact').dialog({autoOpen: false});
         if ($('#all-users').val() === "") {
@@ -70,6 +73,7 @@ $(document).ready(function() {
             });
         }
     });
+
     $('#add-new-user-button').click(function() {
         $('#add-new-user').dialog('open');
         $('#add-user-login').val('');
@@ -77,6 +81,7 @@ $(document).ready(function() {
         $('#add-user-password').val('');
         $('#add-user-name').val('');
     });
+
     $('#add-user-actual').click(function() {
         if ($('#add-user-login').val() === "" || $('#add-user-email').val() === "" ||
                 $('#add-user-password').val() === "") {
